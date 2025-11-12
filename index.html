@@ -19,34 +19,32 @@
             --mango-light: #FFE0B2;
             --mango-dark: #F57C00;
             --mango-accent: #FF5722;
-            --dark-bg: #2E2B28;
+            --dark-bg: #1a1a1a;
+            --dark-card: #2d2d2d;
             --light-bg: #FFF8F0;
+            --light-card: #ffffff;
             --dark-text: #2E2B28;
-            --light-text: #FFF8F0;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        [data-theme="dark"] {
-            --bg-color: var(--dark-bg);
-            --text-color: var(--light-text);
-            --card-bg: rgba(255, 255, 255, 0.1);
-            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        [data-theme="light"] {
-            --bg-color: var(--light-bg);
-            --text-color: var(--dark-text);
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            --light-text: #ffffff;
         }
 
         body {
             background: linear-gradient(135deg, var(--mango-primary), var(--mango-dark));
-            color: var(--text-color);
+            color: var(--light-text);
             min-height: 100vh;
             line-height: 1.6;
             transition: all 0.4s ease;
+        }
+
+        body.light-mode {
+            --bg-color: var(--light-bg);
+            --text-color: var(--dark-text);
+            --card-bg: var(--light-card);
+        }
+
+        body.dark-mode {
+            --bg-color: var(--dark-bg);
+            --text-color: var(--light-text);
+            --card-bg: var(--dark-card);
         }
 
         .container {
@@ -69,7 +67,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: var(--card-shadow);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             border: 2px solid var(--mango-primary);
             transition: all 0.3s ease;
         }
@@ -150,7 +148,7 @@
             font-size: 0.9rem;
         }
 
-        [data-theme="dark"] .role-tag {
+        body.dark-mode .role-tag {
             background: rgba(0, 0, 0, 0.3);
             color: var(--mango-light);
         }
@@ -166,7 +164,7 @@
             backdrop-filter: blur(10px);
         }
 
-        [data-theme="light"] .bio {
+        body.light-mode .bio {
             background: rgba(255, 255, 255, 0.2);
             color: var(--dark-text);
         }
@@ -211,11 +209,11 @@
             border-radius: 18px;
             padding: 1.8rem;
             transition: all 0.4s ease;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             display: flex;
             flex-direction: column;
             height: 100%;
-            box-shadow: var(--card-shadow);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             position: relative;
             overflow: hidden;
             color: var(--text-color);
@@ -249,7 +247,7 @@
             justify-content: center;
         }
 
-        [data-theme="dark"] .link-icon {
+        body.dark-mode .link-icon {
             background: rgba(255, 255, 255, 0.1);
         }
 
@@ -308,7 +306,7 @@
             color: var(--mango-dark);
             font-size: 1.8rem;
             transition: all 0.3s ease;
-            box-shadow: var(--card-shadow);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .social-link:hover {
@@ -328,7 +326,7 @@
             opacity: 0.9;
         }
 
-        [data-theme="light"] .footer {
+        body.light-mode .footer {
             color: var(--dark-text);
         }
 
@@ -419,12 +417,12 @@
         }
     </style>
 </head>
-<body data-theme="dark">
+<body class="dark-mode">
     <div class="mango-bg"></div>
     
     <!-- Theme Toggle -->
     <div class="theme-toggle" id="themeToggle">
-        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
     </div>
     
     <div class="container">
@@ -567,22 +565,23 @@
         const savedTheme = localStorage.getItem('theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         
+        // Set initial theme
         if (savedTheme) {
-            body.setAttribute('data-theme', savedTheme);
+            body.className = savedTheme + '-mode';
             updateThemeIcon(savedTheme);
         } else if (prefersDark) {
-            body.setAttribute('data-theme', 'dark');
+            body.className = 'dark-mode';
             updateThemeIcon('dark');
         } else {
-            body.setAttribute('data-theme', 'light');
+            body.className = 'light-mode';
             updateThemeIcon('light');
         }
         
         themeToggle.addEventListener('click', () => {
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            const isDark = body.classList.contains('dark-mode');
+            const newTheme = isDark ? 'light' : 'dark';
             
-            body.setAttribute('data-theme', newTheme);
+            body.className = newTheme + '-mode';
             localStorage.setItem('theme', newTheme);
             updateThemeIcon(newTheme);
             
@@ -644,20 +643,9 @@
                 
                 document.body.appendChild(mango);
                 
-                // Add animation
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes mangoFloat {
-                        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-                        100% { transform: translateY(-100px) rotate(180deg); opacity: 0; }
-                    }
-                `;
-                document.head.appendChild(style);
-                
                 // Remove after animation
                 setTimeout(() => {
                     mango.remove();
-                    style.remove();
                 }, 2000);
             }
         });
