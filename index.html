@@ -98,11 +98,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
             color: white;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
             position: relative;
             overflow: hidden;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
         .avatar-mango {
@@ -113,6 +119,13 @@
             color: white;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
             animation: mangoSpin 10s linear infinite;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .name {
@@ -412,11 +425,12 @@
             .avatar {
                 width: 130px;
                 height: 130px;
-                font-size: 3rem;
             }
             
             .avatar-mango {
                 font-size: 1.5rem;
+                width: 35px;
+                height: 35px;
             }
             
             .roles {
@@ -449,7 +463,7 @@
         <!-- Header Section -->
         <header class="header">
             <div class="avatar">
-                <i class="fas fa-crown"></i>
+                <img src="https://i.ibb.co/x8fg3GdK/Chrollo.jpg" alt="Mikio Shirato" class="avatar-img">
                 <div class="avatar-mango">🥭</div>
             </div>
             <h1 class="name">Mikio Shirato</h1>
@@ -457,10 +471,11 @@
             
             <div class="roles">
                 <div class="role-tag">Streamer</div>
-                <div class="role-tag">handsome man</div>
-                <div class="role-tag">pro mango</div>
+                <div class="role-tag">Miyomi Staff</div>
+                <div class="role-tag">Website Maintainer</div>
                 <div class="role-tag">Data Supervisor</div>
                 <div class="role-tag">Creative Manager</div>
+                <div class="role-tag">Designer</div>
             </div>
             
             <p class="bio">Creative professional with a passion for streaming, design, and community building. Part of the Miyomi team maintaining the platform while managing creative projects and cosplay talent. Loves mangoes and creating engaging content!</p>
@@ -568,8 +583,8 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p>© 2023 Mikio Shirato. All rights reserved. 
-            <span class="mango-emoji">🥭</span> Made with love for mangoes and creativity <span class="mango-emoji">🥭</span></p>
+            <p>© 2025 Mikio Shirato. All rights reserved. 
+            <span class="mango-emoji">🥭</span> Made with love for mangoes and eepy <span class="mango-emoji">🥭</span></p>
             <p style="margin-top: 0.5rem;">Part of the Miyomi Team</p>
         </footer>
     </div>
