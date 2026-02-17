@@ -3,587 +3,418 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mikio Shirato | Streamer & Creative Director</title>
+    <title>Mikio Shirato • Creative Director & Streamer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
         }
 
         :root {
-            --mango-primary: #FFA726;
-            --mango-secondary: #FF9800;
-            --mango-light: #FFE0B2;
-            --mango-dark: #F57C00;
-            --mango-accent: #FF5722;
-            --dark-bg: #1a1a1a;
-            --dark-card: #2d2d2d;
-            --light-bg: #f8f9fa;
-            --light-card: #ffffff;
-            --dark-text: #2E2B28;
-            --light-text: #ffffff;
+            --mango: #ffb347;
+            --mango-dark: #f57c00;
+            --mango-soft: #ffe0b2;
+            --bg-dark: #1e1e2e;
+            --card-dark: #2d2d3f;
+            --bg-light: #faf3e0;
+            --card-light: #ffffff;
+            --text-light: #ffffff;
+            --text-dark: #2e2b28;
         }
 
         body {
-            background: linear-gradient(135deg, #2c1a0a, #1a1208);
-            color: var(--light-text);
+            background: linear-gradient(145deg, #1e1e2e, #2a1e1a);
+            color: var(--text-light);
             min-height: 100vh;
-            line-height: 1.6;
-            transition: all 0.4s ease;
+            transition: background 0.4s, color 0.4s;
         }
 
         body.light-mode {
-            background: linear-gradient(135deg, #fdf6e3, #fff8e1);
-            --text-color: var(--dark-text);
-            --card-bg: var(--light-card);
-        }
-
-        body.dark-mode {
-            background: linear-gradient(135deg, #2c1a0a, #1a1208);
-            --text-color: var(--light-text);
-            --card-bg: var(--dark-card);
+            background: linear-gradient(145deg, #f9e5c1, #fff2d7);
+            color: var(--text-dark);
         }
 
         .container {
-            max-width: 900px;
+            max-width: 700px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* Theme Toggle */
+        /* Theme toggle */
         .theme-toggle {
             position: fixed;
             top: 20px;
             right: 20px;
-            z-index: 100;
-            background: var(--card-bg);
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
             width: 50px;
             height: 50px;
-            border-radius: 50%;
+            border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            border: 2px solid var(--mango-primary);
-            transition: all 0.3s ease;
+            border: 2px solid var(--mango);
+            transition: 0.3s;
+            z-index: 100;
         }
-
         .theme-toggle:hover {
-            transform: rotate(30deg) scale(1.1);
+            transform: rotate(20deg) scale(1.1);
         }
-
         .theme-toggle i {
-            font-size: 1.3rem;
-            color: var(--mango-dark);
+            font-size: 1.4rem;
+            color: var(--mango);
         }
 
-        /* Header Section */
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            animation: fadeIn 1s ease;
-        }
-
+        /* Avatar */
         .avatar {
-            width: 160px;
-            height: 160px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
-            margin: 0 auto 1.5rem;
-            border: 5px solid var(--mango-light);
-            background: linear-gradient(45deg, var(--mango-primary), var(--mango-accent));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            position: relative;
+            border: 4px solid var(--mango);
             overflow: hidden;
+            margin-bottom: 1rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            position: relative;
         }
-
-        .avatar-img {
+        .avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 50%;
         }
-
-        .avatar-mango {
+        .mango-badge {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 2rem;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-            animation: mangoSpin 10s linear infinite;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 50%;
+            bottom: 0;
+            right: 0;
+            background: var(--mango);
             width: 40px;
             height: 40px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.8rem;
+            border: 2px solid white;
+            transform: translate(10%, 10%);
         }
 
         .name {
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        body.light-mode .name {
-            color: var(--mango-dark);
-            text-shadow: none;
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            background: linear-gradient(135deg, var(--mango), #ff8c42);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .tagline {
-            font-size: 1.3rem;
-            color: var(--mango-light);
-            margin-bottom: 1rem;
-            font-weight: 500;
+            font-size: 1.2rem;
+            color: var(--mango-soft);
+            margin-bottom: 0.8rem;
+            font-weight: 400;
         }
-
         body.light-mode .tagline {
-            color: var(--mango-dark);
+            color: #b95b0e;
         }
 
         .roles {
             display: flex;
             flex-wrap: wrap;
+            gap: 0.6rem;
             justify-content: center;
-            gap: 1rem;
-            margin: 1.5rem 0;
+            margin: 1rem 0;
         }
-
-        .role-tag {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 0.5rem 1.2rem;
+        .role {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(4px);
+            padding: 0.3rem 1.2rem;
             border-radius: 50px;
-            font-weight: 600;
-            color: var(--mango-dark);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid var(--mango);
         }
-
-        body.dark-mode .role-tag {
-            background: rgba(0, 0, 0, 0.3);
-            color: var(--mango-light);
+        body.light-mode .role {
+            background: rgba(0,0,0,0.05);
+            color: #3e2c1a;
         }
 
         .bio {
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            font-size: 1.1rem;
-            color: white;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 1.5rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        body.light-mode .bio {
-            background: rgba(255, 255, 255, 0.7);
-            color: var(--dark-text);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        /* Links Section */
-        .links-section {
-            margin-bottom: 3rem;
-            animation: slideUp 1s ease;
-        }
-
-        .section-title {
-            font-size: 1.7rem;
-            margin-bottom: 1.5rem;
-            color: white;
-            text-align: center;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        body.light-mode .section-title {
-            color: var(--mango-dark);
-        }
-
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(4px);
+            padding: 1.2rem;
+            border-radius: 24px;
+            border-left: 5px solid var(--mango);
+            margin: 2rem 0 1rem;
             width: 100%;
-            height: 3px;
-            background: var(--mango-light);
-            border-radius: 3px;
+            font-size: 1rem;
+            line-height: 1.5;
+            text-align: center;
+        }
+        body.light-mode .bio {
+            background: rgba(255,255,255,0.5);
         }
 
-        body.light-mode .section-title:after {
-            background: var(--mango-dark);
+        /* Section heading */
+        .section-heading {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            text-align: center;
+            color: var(--mango);
+            border-bottom: 2px solid var(--mango);
+            padding-bottom: 0.5rem;
+            width: 100%;
         }
 
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.8rem;
+        /* Links container – single column */
+        .links {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 0 0 1.5rem;
         }
 
         .link-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 18px;
-            padding: 1.8rem;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(30,30,40,0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 60px;
+            padding: 1rem 2rem;
             display: flex;
-            flex-direction: column;
-            height: 100%;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            position: relative;
-            overflow: hidden;
-            color: var(--text-color);
+            align-items: center;
+            gap: 1.2rem;
+            border: 1px solid rgba(255,180,70,0.3);
+            transition: all 0.25s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
         }
-
-        .link-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--mango-primary), var(--mango-accent));
+        body.light-mode .link-card {
+            background: rgba(255,255,240,0.9);
+            border-color: var(--mango);
         }
-
         .link-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            transform: scale(1.02) translateY(-3px);
+            border-color: var(--mango);
+            box-shadow: 0 10px 20px rgba(255,160,0,0.3);
         }
 
         .link-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1.2rem;
-            color: var(--mango-dark);
-            background: var(--mango-light);
-            width: 70px;
-            height: 70px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
+            background: var(--mango);
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.8rem;
+            color: #1a1a1a;
+            flex-shrink: 0;
         }
-
-        body.dark-mode .link-icon {
-            background: rgba(255, 255, 255, 0.1);
+        .link-content {
+            flex: 1;
         }
-
         .link-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 0.7rem;
-            color: var(--mango-dark);
-        }
-
-        .link-desc {
-            font-size: 1rem;
-            opacity: 0.9;
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
-            line-height: 1.5;
-        }
-
-        .link-btn {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--mango-primary), var(--mango-accent));
-            color: white;
-            padding: 0.8rem 1.8rem;
-            border-radius: 50px;
-            text-decoration: none;
             font-weight: 600;
-            text-align: center;
-            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+        .link-desc {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* special youtube card */
+        .link-card.youtube {
+            background: linear-gradient(95deg, #c4302b, #8b0000);
             border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+            color: white;
+        }
+        .link-card.youtube .link-icon {
+            background: white;
+            color: #c4302b;
         }
 
-        .link-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.6);
-        }
-
-        /* Social Links */
-        .social-links {
+        /* social strip */
+        .social-strip {
             display: flex;
             justify-content: center;
-            gap: 1.8rem;
-            margin-top: 3rem;
+            gap: 1rem;
+            margin: 2rem 0 1.5rem;
             flex-wrap: wrap;
         }
-
-        .social-link {
+        .social-icon {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(4px);
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--card-bg);
-            color: var(--mango-dark);
             font-size: 1.8rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            color: var(--mango);
+            transition: 0.2s;
+            border: 1px solid rgba(255,180,70,0.3);
+        }
+        .social-icon:hover {
+            background: var(--mango);
+            color: #1a1a1a;
+            transform: translateY(-5px);
         }
 
-        .social-link:hover {
-            background: var(--mango-primary);
-            color: white;
-            transform: translateY(-5px) scale(1.1);
-        }
-
-        /* Footer */
         .footer {
             text-align: center;
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            font-size: 1rem;
-            opacity: 0.9;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,180,70,0.3);
+            padding-top: 1.5rem;
+            width: 100%;
         }
-
-        body.light-mode .footer {
-            color: var(--dark-text);
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
         .mango-emoji {
             font-size: 1.2rem;
-            margin: 0 0.3rem;
+            animation: spinSlow 8s infinite linear;
+            display: inline-block;
+        }
+        @keyframes spinSlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from { 
-                opacity: 0;
-                transform: translateY(30px);
+        @media (max-width: 500px) {
+            .link-card {
+                padding: 0.8rem 1.2rem;
             }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes mangoSpin {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.1); }
-            100% { transform: rotate(360deg) scale(1); }
-        }
-
-        /* Mango Pattern Background */
-        .mango-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.03;
-            z-index: -1;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50,20 C60,10 80,15 80,30 C80,45 65,50 50,60 C35,50 20,45 20,30 C20,15 40,10 50,20 Z' fill='%23FFA726'/%3E%3C/svg%3E");
-            background-size: 150px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1.5rem;
-            }
-            
-            .name {
-                font-size: 2.2rem;
-            }
-            
-            .links-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .social-links {
-                gap: 1.2rem;
-            }
-            
-            .avatar {
-                width: 130px;
-                height: 130px;
-            }
-            
-            .avatar-mango {
+            .link-icon {
+                width: 42px;
+                height: 42px;
                 font-size: 1.5rem;
-                width: 35px;
-                height: 35px;
             }
-            
-            .roles {
-                gap: 0.7rem;
-            }
-            
-            .role-tag {
-                font-size: 0.8rem;
-                padding: 0.4rem 1rem;
-            }
-            
-            .theme-toggle {
-                top: 10px;
-                right: 10px;
-                width: 45px;
-                height: 45px;
+            .name {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body class="dark-mode">
-    <div class="mango-bg"></div>
-    
+    <!-- mango bg pattern (same as your original) -->
+    <div class="mango-bg" style="position:fixed; top:0; left:0; width:100%; height:100%; opacity:0.03; pointer-events:none; background-image:url('data:image/svg+xml,%3Csvg width=\'80\' height=\'80\' viewBox=\'0 0 80 80\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M40,15 C48,7 64,12 64,24 C64,36 52,42 40,50 C28,42 16,36 16,24 C16,12 32,7 40,15 Z\' fill=\'%23ffb347\'/%3E%3C/svg%3E'); background-size: 100px;"></div>
+
     <!-- Theme Toggle -->
     <div class="theme-toggle" id="themeToggle">
         <i class="fas fa-sun"></i>
     </div>
-    
+
     <div class="container">
-        <!-- Header Section -->
-        <header class="header">
-            <div class="avatar">
-                <img src="https://i.ibb.co/x8fg3GdK/Chrollo.jpg" alt="Mikio Shirato" class="avatar-img">
-                <div class="avatar-mango">🥭</div>
-            </div>
-            <h1 class="name">Mikio Shirato</h1>
-            <p class="tagline">Streamer • Creative Director • Mango Enthusiast</p>
-            
-            <div class="roles">
-                <div class="role-tag">Streamer</div>
-                <div class="role-tag">Miyomi chill guy</div>
-                <div class="role-tag">handsome man</div>
-                <div class="role-tag">Data Supervisor</div>
-                <div class="role-tag">Creative Manager</div>
-            </div>
-            
-            <p class="bio">Creative professional with a passion for streaming, design, and community building. Part of the Miyomi team maintaining the platform while managing creative projects and cosplay talent. Loves mangoes and creating engaging content!</p>
-        </header>
+        <!-- Avatar & header -->
+        <div class="avatar">
+            <img src="https://i.ibb.co/x8fg3GdK/Chrollo.jpg" alt="Mikio">
+            <div class="mango-badge">🥭</div>
+        </div>
+        <h1 class="name">Mikio Shirato</h1>
+        <div class="tagline">creative director • streamer • mango lover</div>
 
-        <!-- Projects Section -->
-        <section class="links-section">
-            <h2 class="section-title">My Work & Projects</h2>
-            <div class="links-grid">
-                <div class="link-card">
-                    <div class="link-icon">
-                        <i class="fas fa-desktop"></i>
-                    </div>
-                    <h3 class="link-title">Miyomi Website</h3>
-                    <p class="link-desc">Maintaining and updating the Miyomi platform with the latest extensions and features for the community.</p>
-                    <a href="https://miyomi.pages.dev/" class="link-btn" target="_blank" rel="noopener">Visit Site</a>
-                </div>
-                
-                <div class="link-card">
-                    <div class="link-icon">
-                        <i class="fas fa-broadcast-tower"></i>
-                    </div>
-                    <h3 class="link-title">Twitch Streaming</h3>
-                    <p class="link-desc">Live streaming creative content, gaming sessions, and community interactions. Come hang out!</p>
-                    <a href="https://www.twitch.tv/iimikio" class="link-btn" target="_blank" rel="noopener">Watch Live</a>
-                </div>
-                
-                <div class="link-card">
-                    <div class="link-icon">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <h3 class="link-title">Creative Design</h3>
-                    <p class="link-desc">UI/UX designs, graphics, and creative direction for various projects and content creators.</p>
-                    <a href="https://www.instagram.com/iimikio/" class="link-btn" target="_blank" rel="noopener">View Portfolio</a>
-                </div>
-                
-                <div class="link-card">
-                    <div class="link-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 class="link-title">Cosplay Management</h3>
-                    <p class="link-desc">Creative direction and management for cosplayers, helping bring characters to life.</p>
-                    <a href="https://web.facebook.com/iimikio" class="link-btn" target="_blank" rel="noopener">Learn More</a>
-                </div>
-            </div>
-        </section>
+        <!-- Role tags expanded to reflect your many hats -->
+        <div class="roles">
+            <span class="role">Miyomi Staff</span>
+            <span class="role">Cosplay Manager</span>
+            <span class="role">Dev & Designer</span>
+            <span class="role">Streamer</span>
+            <span class="role">Event Organizer</span>
+            <span class="role">Creative Director</span>
+        </div>
 
-        <!-- Social Media Section -->
-        <section class="links-section">
-            <h2 class="section-title">Connect With Me</h2>
-            <div class="links-grid">
-                <div class="link-card">
-                    <div class="link-icon">
-                        <i class="fab fa-twitch"></i>
-                    </div>
-                    <h3 class="link-title">Twitch</h3>
-                    <p class="link-desc">Follow my channel for live streams, gaming content, and creative sessions.</p>
-                    <a href="https://www.twitch.tv/iimikio" class="link-btn" target="_blank" rel="noopener">Follow</a>
-                </div>
-                
-                <div class="link-card">
-                    <div class="link-icon">
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                    <h3 class="link-title">Instagram</h3>
-                    <p class="link-desc">Behind-the-scenes, design work, and personal updates in my creative journey.</p>
-                    <a href="https://www.instagram.com/iimikio/" class="link-btn" target="_blank" rel="noopener">Follow</a>
-                </div>
-                
-                <div class="link-card">
-                    <div class="link-icon">
-                        <i class="fab fa-facebook"></i>
-                    </div>
-                    <h3 class="link-title">Facebook</h3>
-                    <p class="link-desc">Connect for updates, events, and professional networking opportunities.</p>
-                    <a href="https://web.facebook.com/iimikio" class="link-btn" target="_blank" rel="noopener">Connect</a>
-                </div>
-                
-                <div class="link-card">
-                    <div class="link-icon">
-                        <i class="fab fa-github"></i>
-                    </div>
-                    <h3 class="link-title">GitHub</h3>
-                    <p class="link-desc">Check out my coding projects, contributions, and open-source work.</p>
-                    <a href="https://github.com/mikkiio" class="link-btn" target="_blank" rel="noopener">View Code</a>
-                </div>
-            </div>
-        </section>
+        <!-- Expanded bio covering all your roles -->
+        <div class="bio">
+            🥭 I'm part of the Miyomi team, where I help maintain the platform and oversee data. I also manage creative projects for cosplayers, develop apps and websites, and stream games & random content. On top of that, I organize community competitions and bring creative direction to everything I touch. Let's build something cool together!
+        </div>
 
-        <!-- Social Links -->
-        <div class="social-links">
-            <a href="https://www.twitch.tv/iimikio" class="social-link" target="_blank" rel="noopener">
-                <i class="fab fa-twitch"></i>
+        <!-- My Projects & Roles Section -->
+        <h2 class="section-heading">🚀 My Work & Projects</h2>
+        <div class="links">
+            <!-- Miyomi Hub -->
+            <a href="https://miyomi.pages.dev/" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon"><i class="fas fa-globe"></i></div>
+                <div class="link-content">
+                    <div class="link-title">Miyomi Hub</div>
+                    <div class="link-desc">Community platform for anime/manga resources</div>
+                </div>
             </a>
-            <a href="https://www.instagram.com/iimikio/" class="social-link" target="_blank" rel="noopener">
-                <i class="fab fa-instagram"></i>
+
+            <!-- Cosplay Management (links to Instagram where cosplay content lives) -->
+            <a href="https://www.instagram.com/iimikio/" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon"><i class="fas fa-mask"></i></div>
+                <div class="link-content">
+                    <div class="link-title">Cosplay Management</div>
+                    <div class="link-desc">Creative direction & support for cosplayers</div>
+                </div>
             </a>
-            <a href="https://web.facebook.com/iimikio" class="social-link" target="_blank" rel="noopener">
-                <i class="fab fa-facebook"></i>
+
+            <!-- Dev Projects (GitHub) -->
+            <a href="https://github.com/mikkiio" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon"><i class="fab fa-github"></i></div>
+                <div class="link-content">
+                    <div class="link-title">Development</div>
+                    <div class="link-desc">Apps, websites, and open source</div>
+                </div>
             </a>
-            <a href="https://github.com/mikkiio" class="social-link" target="_blank" rel="noopener">
-                <i class="fab fa-github"></i>
+
+            <!-- Streaming (YouTube first, then Twitch secondary – but we'll keep both) -->
+            <a href="https://youtube.com/@iimikio" target="_blank" rel="noopener" class="link-card youtube">
+                <div class="link-icon"><i class="fab fa-youtube"></i></div>
+                <div class="link-content">
+                    <div class="link-title">YouTube</div>
+                    <div class="link-desc">Gaming, vlogs, random fun</div>
+                </div>
             </a>
+
+            <a href="https://www.twitch.tv/iimikio" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon"><i class="fab fa-twitch"></i></div>
+                <div class="link-content">
+                    <div class="link-title">Twitch</div>
+                    <div class="link-desc">Live streams & community</div>
+                </div>
+            </a>
+
+            <!-- Creative Direction (can link to Instagram as portfolio) -->
+            <a href="https://www.instagram.com/iimikio/" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon"><i class="fas fa-paint-brush"></i></div>
+                <div class="link-content">
+                    <div class="link-title">Creative Direction</div>
+                    <div class="link-desc">UI/UX, branding, visual design</div>
+                </div>
+            </a>
+
+            <!-- Competition Organizer (maybe link to a specific event page or Discord) -->
+            <a href="https://discord.gg/miyomi" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon"><i class="fas fa-trophy"></i></div>
+                <div class="link-content">
+                    <div class="link-title">Community Events</div>
+                    <div class="link-desc">Organizing contests & competitions</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Social strip (quick access) -->
+        <div class="social-strip">
+            <a href="https://www.twitch.tv/iimikio" class="social-icon"><i class="fab fa-twitch"></i></a>
+            <a href="https://www.instagram.com/iimikio/" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="https://web.facebook.com/iimikio" class="social-icon"><i class="fab fa-facebook"></i></a>
+            <a href="https://github.com/mikkiio" class="social-icon"><i class="fab fa-github"></i></a>
+            <a href="https://youtube.com/@iimikio" class="social-icon"><i class="fab fa-youtube"></i></a>
         </div>
 
         <!-- Footer -->
         <footer class="footer">
-            <p>© 2025 Mikio Shirato. All rights reserved. 
-            <span class="mango-emoji">🥭</span> Made with love for mangoes and eepy <span class="mango-emoji">🥭</span></p>
+            <p>© 2025 Mikio Shirato · <span class="mango-emoji">🥭</span> Made with love for mangoes and eepy <span class="mango-emoji">🥭</span></p>
             <p style="margin-top: 0.5rem;">Part of the Miyomi Team</p>
         </footer>
     </div>
@@ -593,95 +424,28 @@
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
         const themeIcon = themeToggle.querySelector('i');
-        
-        // Check for saved theme or prefer-color-scheme
+
         const savedTheme = localStorage.getItem('theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        
-        // Set initial theme
+
         if (savedTheme) {
             body.className = savedTheme + '-mode';
-            updateThemeIcon(savedTheme);
+            themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         } else if (prefersDark) {
             body.className = 'dark-mode';
-            updateThemeIcon('dark');
+            themeIcon.className = 'fas fa-sun';
         } else {
             body.className = 'light-mode';
-            updateThemeIcon('light');
+            themeIcon.className = 'fas fa-moon';
         }
-        
+
         themeToggle.addEventListener('click', () => {
             const isDark = body.classList.contains('dark-mode');
             const newTheme = isDark ? 'light' : 'dark';
-            
             body.className = newTheme + '-mode';
             localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
-            
-            // Add theme change animation
-            body.style.opacity = '0.8';
-            setTimeout(() => {
-                body.style.opacity = '1';
-            }, 300);
-        });
-        
-        function updateThemeIcon(theme) {
-            if (theme === 'dark') {
-                themeIcon.className = 'fas fa-sun';
-            } else {
-                themeIcon.className = 'fas fa-moon';
-            }
-        }
-        
-        // Add interactive elements
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add staggered animation to cards
-            const cards = document.querySelectorAll('.link-card');
-            
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.1}s`;
-                card.style.opacity = '0';
-            });
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = `slideUp 0.6s ease ${entry.target.style.animationDelay} forwards`;
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            cards.forEach(card => {
-                observer.observe(card);
-            });
-            
-            // Add mango particle effect on click
-            document.body.addEventListener('click', function(e) {
-                if (Math.random() > 0.7) { // 30% chance to create mango
-                    createMangoParticle(e.clientX, e.clientY);
-                }
-            });
-            
-            function createMangoParticle(x, y) {
-                const mango = document.createElement('div');
-                mango.innerHTML = '🥭';
-                mango.style.position = 'fixed';
-                mango.style.left = `${x}px`;
-                mango.style.top = `${y}px`;
-                mango.style.fontSize = '1.5rem';
-                mango.style.pointerEvents = 'none';
-                mango.style.zIndex = '9999';
-                mango.style.animation = `mangoFloat 2s ease-out forwards`;
-                
-                document.body.appendChild(mango);
-                
-                // Remove after animation
-                setTimeout(() => {
-                    mango.remove();
-                }, 2000);
-            }
+            themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         });
     </script>
 </body>
-</html>
+    </html>
