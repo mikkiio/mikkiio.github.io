@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mikio Shirato • Creative Director & Streamer</title>
+    <title>Mikio Shirato • Creator & Streamer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -79,7 +79,7 @@
             border-radius: 50%;
             border: 4px solid var(--mango);
             overflow: hidden;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
             position: relative;
         }
@@ -107,65 +107,35 @@
         .name {
             font-size: 2.4rem;
             font-weight: 700;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
             background: linear-gradient(135deg, var(--mango), #ff8c42);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .tagline {
-            font-size: 1.2rem;
-            color: var(--mango-soft);
-            margin-bottom: 0.8rem;
-            font-weight: 400;
-        }
-        body.light-mode .tagline {
-            color: #b95b0e;
-        }
-
-        .roles {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            justify-content: center;
-            margin: 1rem 0;
-        }
-        .role {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(4px);
-            padding: 0.3rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid var(--mango);
-        }
-        body.light-mode .role {
-            background: rgba(0,0,0,0.05);
-            color: #3e2c1a;
-        }
-
-        .bio {
-            background: rgba(0,0,0,0.2);
-            backdrop-filter: blur(4px);
-            padding: 1.2rem;
-            border-radius: 24px;
-            border-left: 5px solid var(--mango);
-            margin: 2rem 0 1rem;
-            width: 100%;
-            font-size: 1rem;
-            line-height: 1.5;
+        /* Simple personal intro */
+        .personal-intro {
+            font-size: 1.1rem;
+            line-height: 1.6;
             text-align: center;
+            max-width: 550px;
+            margin: 1rem 0 2rem 0;
+            background: rgba(0,0,0,0.15);
+            padding: 1.2rem 1.8rem;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,180,70,0.3);
         }
-        body.light-mode .bio {
-            background: rgba(255,255,255,0.5);
+        body.light-mode .personal-intro {
+            background: rgba(255,255,255,0.25);
         }
 
         /* Section heading */
         .section-heading {
             font-size: 1.6rem;
             font-weight: 600;
-            margin: 2rem 0 1rem;
+            margin: 2rem 0 1.2rem;
             text-align: center;
             color: var(--mango);
             border-bottom: 2px solid var(--mango);
@@ -227,8 +197,9 @@
             margin-bottom: 0.2rem;
         }
         .link-desc {
-            font-size: 0.85rem;
-            opacity: 0.8;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.3;
         }
 
         /* special youtube card */
@@ -305,7 +276,7 @@
     </style>
 </head>
 <body class="dark-mode">
-    <!-- mango bg pattern (same as your original) -->
+    <!-- mango bg pattern -->
     <div class="mango-bg" style="position:fixed; top:0; left:0; width:100%; height:100%; opacity:0.03; pointer-events:none; background-image:url('data:image/svg+xml,%3Csvg width=\'80\' height=\'80\' viewBox=\'0 0 80 80\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M40,15 C48,7 64,12 64,24 C64,36 52,42 40,50 C28,42 16,36 16,24 C16,12 32,7 40,15 Z\' fill=\'%23ffb347\'/%3E%3C/svg%3E'); background-size: 100px;"></div>
 
     <!-- Theme Toggle -->
@@ -314,60 +285,55 @@
     </div>
 
     <div class="container">
-        <!-- Avatar & header -->
+        <!-- Avatar & name -->
         <div class="avatar">
             <img src="https://i.ibb.co/x8fg3GdK/Chrollo.jpg" alt="Mikio">
             <div class="mango-badge">🥭</div>
         </div>
         <h1 class="name">Mikio Shirato</h1>
-        <div class="tagline">creative director • streamer • mango lover</div>
 
-        <!-- Role tags expanded to reflect your many hats -->
-        <div class="roles">
-            <span class="role">Miyomi Staff</span>
-            <span class="role">Cosplay Manager</span>
-            <span class="role">Dev & Designer</span>
-            <span class="role">Streamer</span>
-            <span class="role">Event Organizer</span>
-            <span class="role">Creative Director</span>
+        <!-- Simple, personal about me (no role tags) -->
+        <div class="personal-intro">
+            👋 Hi, I'm Mikio — a creative soul who streams, builds things, and helps run the Miyomi community. I love mangoes, making content, and connecting with people. Welcome to my little corner of the web! 🥭
         </div>
 
-        <!-- Expanded bio covering all your roles -->
-        <div class="bio">
-            🥭 I'm part of the Miyomi team, where I help maintain the platform and oversee data. I also manage creative projects for cosplayers, develop apps and websites, and stream games & random content. On top of that, I organize community competitions and bring creative direction to everything I touch. Let's build something cool together!
-        </div>
-
-        <!-- My Projects & Roles Section -->
-        <h2 class="section-heading">🚀 My Work & Projects</h2>
+        <!-- PROJECTS & WORK SECTION -->
+        <h2 class="section-heading">🚀 My Projects & Work</h2>
         <div class="links">
+
             <!-- Miyomi Hub -->
             <a href="https://miyomi.pages.dev/" target="_blank" rel="noopener" class="link-card">
                 <div class="link-icon"><i class="fas fa-globe"></i></div>
                 <div class="link-content">
                     <div class="link-title">Miyomi Hub</div>
-                    <div class="link-desc">Community platform for anime/manga resources</div>
+                    <div class="link-desc">Community platform for anime/manga resources – I help run this!</div>
                 </div>
             </a>
 
-            <!-- Cosplay Management (links to Instagram where cosplay content lives) -->
-            <a href="https://www.instagram.com/iimikio/" target="_blank" rel="noopener" class="link-card">
-                <div class="link-icon"><i class="fas fa-mask"></i></div>
-                <div class="link-content">
-                    <div class="link-title">Cosplay Management</div>
-                    <div class="link-desc">Creative direction & support for cosplayers</div>
-                </div>
-            </a>
-
-            <!-- Dev Projects (GitHub) -->
+            <!-- Development (GitHub) -->
             <a href="https://github.com/mikkiio" target="_blank" rel="noopener" class="link-card">
                 <div class="link-icon"><i class="fab fa-github"></i></div>
                 <div class="link-content">
-                    <div class="link-title">Development</div>
-                    <div class="link-desc">Apps, websites, and open source</div>
+                    <div class="link-title">GitHub</div>
+                    <div class="link-desc">My code, projects, and open-source contributions</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- CONNECT WITH ME SECTION (Social/Personal) -->
+        <h2 class="section-heading">🌐 Connect With Me</h2>
+        <div class="links">
+
+            <!-- Facebook (community updates & streaming) -->
+            <a href="https://fb.com/iimikio" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon"><i class="fab fa-facebook"></i></div>
+                <div class="link-content">
+                    <div class="link-title">Facebook</div>
+                    <div class="link-desc">Community updates, I stream here & share info</div>
                 </div>
             </a>
 
-            <!-- Streaming (YouTube first, then Twitch secondary – but we'll keep both) -->
+            <!-- YouTube (gaming, vlogs) -->
             <a href="https://youtube.com/@iimikio" target="_blank" rel="noopener" class="link-card youtube">
                 <div class="link-icon"><i class="fab fa-youtube"></i></div>
                 <div class="link-content">
@@ -376,46 +342,37 @@
                 </div>
             </a>
 
+            <!-- Twitch (streaming) -->
             <a href="https://www.twitch.tv/iimikio" target="_blank" rel="noopener" class="link-card">
                 <div class="link-icon"><i class="fab fa-twitch"></i></div>
                 <div class="link-content">
                     <div class="link-title">Twitch</div>
-                    <div class="link-desc">Live streams & community</div>
+                    <div class="link-desc">Live streams & chill community</div>
                 </div>
             </a>
 
-            <!-- Creative Direction (can link to Instagram as portfolio) -->
+            <!-- Instagram (personal, direct chat) -->
             <a href="https://www.instagram.com/iimikio/" target="_blank" rel="noopener" class="link-card">
-                <div class="link-icon"><i class="fas fa-paint-brush"></i></div>
+                <div class="link-icon"><i class="fab fa-instagram"></i></div>
                 <div class="link-content">
-                    <div class="link-title">Creative Direction</div>
-                    <div class="link-desc">UI/UX, branding, visual design</div>
-                </div>
-            </a>
-
-            <!-- Competition Organizer (maybe link to a specific event page or Discord) -->
-            <a href="https://discord.gg/miyomi" target="_blank" rel="noopener" class="link-card">
-                <div class="link-icon"><i class="fas fa-trophy"></i></div>
-                <div class="link-content">
-                    <div class="link-title">Community Events</div>
-                    <div class="link-desc">Organizing contests & competitions</div>
+                    <div class="link-title">Instagram</div>
+                    <div class="link-desc">Talk to me directly, see my personal life</div>
                 </div>
             </a>
         </div>
 
-        <!-- Social strip (quick access) -->
+        <!-- Quick social strip (optional but nice) -->
         <div class="social-strip">
+            <a href="https://fb.com/iimikio" class="social-icon"><i class="fab fa-facebook"></i></a>
+            <a href="https://youtube.com/@iimikio" class="social-icon"><i class="fab fa-youtube"></i></a>
             <a href="https://www.twitch.tv/iimikio" class="social-icon"><i class="fab fa-twitch"></i></a>
             <a href="https://www.instagram.com/iimikio/" class="social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="https://web.facebook.com/iimikio" class="social-icon"><i class="fab fa-facebook"></i></a>
             <a href="https://github.com/mikkiio" class="social-icon"><i class="fab fa-github"></i></a>
-            <a href="https://youtube.com/@iimikio" class="social-icon"><i class="fab fa-youtube"></i></a>
         </div>
 
         <!-- Footer -->
         <footer class="footer">
             <p>© 2025 Mikio Shirato · <span class="mango-emoji">🥭</span> Made with love for mangoes and eepy <span class="mango-emoji">🥭</span></p>
-            <p style="margin-top: 0.5rem;">Part of the Miyomi Team</p>
         </footer>
     </div>
 
@@ -448,4 +405,4 @@
         });
     </script>
 </body>
-    </html>
+</html>
