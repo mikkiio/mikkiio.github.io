@@ -6,42 +6,58 @@
     <title>Mikio Shirato • Creator & Streamer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Poppins', system-ui, sans-serif;
         }
 
         :root {
             --mango: #ffb347;
             --mango-dark: #f57c00;
-            --mango-soft: #ffe0b2;
-            --bg-dark: #1e1e2e;
-            --card-dark: #2d2d3f;
-            --bg-light: #faf3e0;
-            --card-light: #ffffff;
+            --mango-glow: rgba(255, 179, 71, 0.5);
+            --bg-dark: #12121a;
+            --card-dark: rgba(30, 30, 46, 0.7);
             --text-light: #ffffff;
-            --text-dark: #2e2b28;
-            --neon-glow: rgba(255, 179, 71, 0.4);
+            --text-dark: #1a1a1a;
         }
 
         body {
-            background: linear-gradient(145deg, #1e1e2e, #12121c);
+            background: var(--bg-dark);
             color: var(--text-light);
             min-height: 100vh;
             transition: background 0.4s, color 0.4s;
+            overflow-x: hidden;
         }
 
         body.light-mode {
-            background: linear-gradient(145deg, #f9e5c1, #fff2d7);
+            background: linear-gradient(145deg, #fdf6e3, #fff2d7);
             color: var(--text-dark);
+        }
+
+        /* Animated Mango Background */
+        .mango-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.04;
+            pointer-events: none;
+            background-image: url('data:image/svg+xml,%3Csvg width=\'80\' height=\'80\' viewBox=\'0 0 80 80\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M40,15 C48,7 64,12 64,24 C64,36 52,42 40,50 C28,42 16,36 16,24 C16,12 32,7 40,15 Z\' fill=\'%23ffb347\'/%3E%3C/svg%3E');
+            background-size: 100px;
+            z-index: -1;
+            animation: drift 60s linear infinite;
+        }
+        @keyframes drift {
+            0% { background-position: 0 0; }
+            100% { background-position: 1000px 1000px; }
         }
 
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 2rem 1.5rem;
+            padding: 3rem 1.5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -50,309 +66,250 @@
         /* Theme toggle */
         .theme-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(8px);
-            width: 50px;
-            height: 50px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            top: 20px; right: 20px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
             cursor: pointer;
             border: 2px solid var(--mango);
-            transition: 0.3s;
+            box-shadow: 0 0 15px transparent;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 100;
         }
         .theme-toggle:hover {
-            transform: rotate(20deg) scale(1.1);
-            box-shadow: 0 0 15px var(--neon-glow);
+            transform: rotate(45deg) scale(1.15);
+            box-shadow: 0 0 20px var(--mango-glow);
+            background: var(--mango);
         }
-        .theme-toggle i {
-            font-size: 1.4rem;
-            color: var(--mango);
-        }
+        .theme-toggle:hover i { color: #1a1a1a; }
+        .theme-toggle i { font-size: 1.4rem; color: var(--mango); transition: 0.3s; }
 
         /* Avatar */
         .avatar {
-            width: 130px;
-            height: 130px;
+            width: 140px; height: 140px;
             border-radius: 50%;
             border: 4px solid var(--mango);
-            overflow: hidden;
-            margin-bottom: 1.2rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            padding: 4px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 30px rgba(255, 179, 71, 0.2);
             position: relative;
         }
         .avatar img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
+            border-radius: 50%;
         }
         .mango-badge {
             position: absolute;
-            bottom: 0;
-            right: 0;
-            background: var(--mango);
-            width: 40px;
-            height: 40px;
+            bottom: 0; right: 0;
+            background: var(--bg-dark);
+            width: 45px; height: 45px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             font-size: 1.8rem;
-            border: 2px solid white;
-            transform: translate(10%, 10%);
+            border: 2px solid var(--mango);
+            transform: translate(5%, 5%);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translate(5%, 5%) scale(1); }
+            50% { transform: translate(5%, -5%) scale(1.1); }
         }
 
         .name {
-            font-size: 2.4rem;
+            font-size: 2.8rem;
             font-weight: 700;
-            margin-bottom: 0.2rem;
-            background: linear-gradient(135deg, var(--mango), #ff8c42);
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff, var(--mango), #ff8c42);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
+            text-align: center;
         }
+        body.light-mode .name { background: linear-gradient(135deg, #1a1a1a, var(--mango-dark)); -webkit-background-clip: text; }
 
-        /* Simple personal intro */
         .personal-intro {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            text-align: center;
-            max-width: 600px;
-            margin: 1rem 0 2rem 0;
-            background: rgba(0,0,0,0.15);
-            padding: 1.2rem 1.8rem;
-            border-radius: 20px;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255,180,70,0.2);
+            font-size: 1.1rem; line-height: 1.7; text-align: center;
+            max-width: 600px; margin: 1rem 0 3rem 0;
+            background: var(--card-dark);
+            padding: 1.5rem 2rem;
+            border-radius: 24px;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,179,71,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
-        body.light-mode .personal-intro {
-            background: rgba(255,255,255,0.4);
-        }
+        body.light-mode .personal-intro { background: rgba(255,255,255,0.6); border-color: var(--mango); }
 
-        /* Section heading */
         .section-heading {
-            font-size: 1.6rem;
-            font-weight: 600;
-            margin: 2.5rem 0 1.5rem;
-            text-align: center;
-            color: var(--mango);
-            border-bottom: 2px solid var(--mango);
-            padding-bottom: 0.5rem;
+            font-size: 1.8rem; font-weight: 600;
+            margin: 3rem 0 2rem; text-align: center;
+            color: var(--text-light);
+            display: flex; align-items: center; justify-content: center; gap: 10px;
             width: 100%;
-            letter-spacing: 0.5px;
+        }
+        body.light-mode .section-heading { color: var(--text-dark); }
+        .section-heading::before, .section-heading::after {
+            content: ''; height: 2px; width: 40px; background: var(--mango); border-radius: 2px;
         }
 
-        /* Links container */
-        .links {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin: 0 0 1.5rem;
-        }
-
-        .link-card {
-            background: rgba(30,30,40,0.6);
-            backdrop-filter: blur(8px);
-            border-radius: 16px;
-            padding: 1rem 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-            border: 1px solid rgba(255,180,70,0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-        }
-        body.light-mode .link-card {
-            background: rgba(255,255,255,0.7);
-            border-color: rgba(255,180,70,0.5);
-        }
-        .link-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--mango);
-            box-shadow: 0 8px 20px var(--neon-glow);
-        }
-
-        .link-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: var(--mango);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: #1a1a1a;
-            flex-shrink: 0;
-        }
-        .link-content {
-            flex: 1;
-        }
-        .link-title {
-            font-weight: 600;
-            font-size: 1.2rem;
-            margin-bottom: 0.2rem;
-        }
-        .link-desc {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            line-height: 1.3;
-        }
-
-        .link-card.youtube {
-            background: linear-gradient(95deg, #c4302b, #8b0000);
-            border: none;
-            color: white;
-        }
-        .link-card.youtube .link-icon {
-            background: white;
-            color: #c4302b;
-        }
-
-        /* --- PORTFOLIO GRIDS --- */
+        /* --- HIGH-END PORTFOLIO DISPLAY --- */
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            width: 100%;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem; width: 100%; margin-bottom: 3rem;
         }
 
-        /* Thumbnails */
+        /* Glassmorphism Thumbnail Cards */
         .thumb-card {
-            border-radius: 12px;
+            background: var(--card-dark);
+            border-radius: 20px;
             overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
             position: relative;
-            aspect-ratio: 16/9;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s ease;
-            background: #000;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
         }
-        body.light-mode .thumb-card {
-            border: 1px solid rgba(0,0,0,0.1);
+        .thumb-wrapper {
+            aspect-ratio: 16/9; overflow: hidden; position: relative;
         }
         .thumb-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s ease, filter 0.4s ease;
         }
         .thumb-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 20px var(--neon-glow);
+            transform: translateY(-10px);
             border-color: var(--mango);
+            box-shadow: 0 15px 35px var(--mango-glow);
         }
         .thumb-card:hover img {
-            transform: scale(1.05);
-            opacity: 0.7;
+            transform: scale(1.1);
+            filter: brightness(0.4) blur(2px);
         }
-        .thumb-overlay {
-            position: absolute;
-            bottom: -50px;
-            left: 0;
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            color: white;
-            transition: bottom 0.3s ease;
-            font-weight: 600;
-            text-align: center;
+        
+        .thumb-info {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%; text-align: center;
+            opacity: 0; transition: all 0.4s ease;
         }
-        .thumb-card:hover .thumb-overlay {
-            bottom: 0;
+        .thumb-card:hover .thumb-info { opacity: 1; }
+        
+        .thumb-title {
+            color: #fff; font-size: 1.4rem; font-weight: 700;
+            margin-bottom: 5px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            transform: translateY(20px); transition: transform 0.4s ease;
         }
+        .thumb-card:hover .thumb-title { transform: translateY(0); }
+        
+        .thumb-tag {
+            background: var(--mango); color: #000;
+            padding: 4px 12px; border-radius: 20px; font-size: 0.8rem;
+            font-weight: 600; display: inline-block;
+            transform: translateY(20px); transition: transform 0.4s ease 0.1s;
+        }
+        .thumb-card:hover .thumb-tag { transform: translateY(0); }
 
-        /* Short Videos */
+        /* Sleek Mobile Device Mockups for Shorts */
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            width: 100%;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem; width: 100%; justify-items: center;
         }
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 177.77%; /* 16:9 ratio for shorts */
-            height: 0;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.1);
+        .phone-mockup {
+            width: 100%; max-width: 280px;
+            aspect-ratio: 9/16;
+            border-radius: 30px;
+            border: 8px solid #2a2a35;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 0 0 2px #444;
+            overflow: hidden; position: relative;
+            background: #000;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
+        body.light-mode .phone-mockup { border-color: #e0e0e0; box-shadow: 0 20px 40px rgba(0,0,0,0.1), inset 0 0 0 2px #ccc; }
+        
+        .phone-mockup:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px var(--mango-glow);
+            border-color: #3a3a48;
+        }
+        
+        .phone-mockup iframe {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%; border: none;
         }
 
-        /* social strip */
+        /* --- LINKS & SOCIALS --- */
+        .links {
+            width: 100%; display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 2rem;
+        }
+        .link-card {
+            background: var(--card-dark);
+            backdrop-filter: blur(12px); border-radius: 60px;
+            padding: 1rem 2rem; display: flex; align-items: center; gap: 1.2rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease; cursor: pointer; text-decoration: none; color: inherit;
+        }
+        body.light-mode .link-card { background: rgba(255,255,255,0.7); border-color: rgba(0,0,0,0.1); }
+        
+        .link-card:hover {
+            transform: scale(1.02);
+            border-color: var(--mango);
+            box-shadow: 0 10px 25px var(--mango-glow);
+        }
+        .link-icon {
+            width: 50px; height: 50px; border-radius: 50%;
+            background: var(--mango);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; color: #1a1a1a; flex-shrink: 0;
+        }
+        .link-content { flex: 1; }
+        .link-title { font-weight: 600; font-size: 1.2rem; margin-bottom: 0.2rem; }
+        .link-desc { font-size: 0.9rem; opacity: 0.8; line-height: 1.3; }
+
+        .link-card.youtube { background: linear-gradient(135deg, #cc0000, #8b0000); border: none; color: white; }
+        .link-card.youtube .link-icon { background: white; color: #cc0000; }
+        .link-card.youtube:hover { box-shadow: 0 10px 25px rgba(204, 0, 0, 0.4); }
+
         .social-strip {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2.5rem 0 1.5rem;
-            flex-wrap: wrap;
+            display: flex; justify-content: center; gap: 1.2rem; margin: 1rem 0 2rem; flex-wrap: wrap;
         }
         .social-icon {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(4px);
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--mango);
-            transition: 0.3s;
-            border: 1px solid rgba(255,180,70,0.2);
+            background: var(--card-dark);
+            backdrop-filter: blur(8px);
+            width: 55px; height: 55px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; color: var(--mango); transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.05);
         }
-        body.light-mode .social-icon {
-            background: rgba(0,0,0,0.05);
-        }
+        body.light-mode .social-icon { background: rgba(255,255,255,0.7); border-color: rgba(0,0,0,0.1); }
         .social-icon:hover {
-            background: var(--mango);
-            color: #1a1a1a;
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px var(--neon-glow);
+            background: var(--mango); color: #1a1a1a;
+            transform: translateY(-8px) rotate(10deg);
+            box-shadow: 0 10px 20px var(--mango-glow);
         }
 
         .footer {
-            text-align: center;
-            font-size: 0.9rem;
-            opacity: 0.6;
-            margin-top: 3rem;
-            border-top: 1px solid rgba(255,180,70,0.2);
-            padding-top: 1.5rem;
-            width: 100%;
+            text-align: center; font-size: 0.9rem; opacity: 0.7;
+            margin-top: 3rem; border-top: 1px solid rgba(255,179,71,0.2);
+            padding-top: 2rem; width: 100%;
         }
         .mango-emoji {
-            font-size: 1.2rem;
-            animation: spinSlow 8s infinite linear;
-            display: inline-block;
+            font-size: 1.4rem; animation: spinSlow 8s infinite linear; display: inline-block; margin: 0 5px;
         }
-        @keyframes spinSlow {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spinSlow { 100% { transform: rotate(360deg); } }
 
         @media (max-width: 600px) {
-            .name { font-size: 2rem; }
-            .portfolio-grid { grid-template-columns: 1fr; }
-            .video-grid { grid-template-columns: repeat(2, 1fr); }
+            .name { font-size: 2.2rem; }
+            .link-card { padding: 0.8rem 1.2rem; border-radius: 20px; }
+            .link-icon { width: 45px; height: 45px; font-size: 1.5rem; }
+            .phone-mockup { max-width: 240px; }
         }
     </style>
 </head>
 <body class="dark-mode">
-    <div class="mango-bg" style="position:fixed; top:0; left:0; width:100%; height:100%; opacity:0.02; pointer-events:none; background-image:url('data:image/svg+xml,%3Csvg width=\'80\' height=\'80\' viewBox=\'0 0 80 80\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M40,15 C48,7 64,12 64,24 C64,36 52,42 40,50 C28,42 16,36 16,24 C16,12 32,7 40,15 Z\' fill=\'%23ffb347\'/%3E%3C/svg%3E'); background-size: 100px;"></div>
+    <div class="mango-bg"></div>
 
     <div class="theme-toggle" id="themeToggle">
         <i class="fas fa-sun"></i>
@@ -366,57 +323,104 @@
         <h1 class="name">Mikio Shirato</h1>
 
         <div class="personal-intro">
-            Yo, I'm Mikio. I'm a creator, video editor, and community builder. From streaming and designing thumbnails to managing the Miyomi hub, this is my creative space. Welcome to my corner of the web! 🥭
+            Yo, I'm Mikio. I'm a creative soul who streams, edits videos, designs graphics, and helps run the Miyomi community. Welcome to my little corner of the web! 🥭
         </div>
 
-        <h2 class="section-heading">🎨 Creative Portfolio</h2>
+        <h2 class="section-heading">Creative Portfolio</h2>
         
-        <h3 style="width: 100%; margin-bottom: 1rem; font-weight: 500; font-size: 1.2rem; opacity: 0.9;">Thumbnail Designs</h3>
         <div class="portfolio-grid">
             
             <div class="thumb-card">
-                <img src="https://via.placeholder.com/600x338/2d2d3f/ffb347?text=Thumbnail+Design+1" alt="Thumbnail 1">
-                <div class="thumb-overlay">Gaming Stream Thumbnail</div>
+                <div class="thumb-wrapper">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80" alt="Gaming Thumbnail">
+                    <div class="thumb-info">
+                        <div class="thumb-title">Stream Highlights</div>
+                        <div class="thumb-tag"><i class="fas fa-gamepad"></i> Gaming</div>
+                    </div>
+                </div>
             </div>
 
             <div class="thumb-card">
-                <img src="https://via.placeholder.com/600x338/2d2d3f/ffb347?text=Thumbnail+Design+2" alt="Thumbnail 2">
-                <div class="thumb-overlay">Podcast Thumbnail</div>
+                <div class="thumb-wrapper">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" alt="Design Thumbnail">
+                    <div class="thumb-info">
+                        <div class="thumb-title">Miyomi V2 Release</div>
+                        <div class="thumb-tag"><i class="fas fa-paint-brush"></i> UI/UX</div>
+                    </div>
+                </div>
             </div>
 
             <div class="thumb-card">
-                <img src="https://via.placeholder.com/600x338/2d2d3f/ffb347?text=Thumbnail+Design+3" alt="Thumbnail 3">
-                <div class="thumb-overlay">Tutorial Thumbnail</div>
+                <div class="thumb-wrapper">
+                    <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=800&q=80" alt="Podcast Thumbnail">
+                    <div class="thumb-info">
+                        <div class="thumb-title">Reader's Hangout EP 4</div>
+                        <div class="thumb-tag"><i class="fas fa-microphone"></i> Podcast</div>
+                    </div>
+                </div>
             </div>
 
         </div>
 
-        <h3 style="width: 100%; margin-bottom: 1rem; margin-top: 1rem; font-weight: 500; font-size: 1.2rem; opacity: 0.9;">Edited Shorts & Clips</h3>
         <div class="video-grid">
             
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="phone-mockup">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" title="Short Video 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" allowfullscreen></iframe>
+            <div class="phone-mockup">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" title="Short Video 2" allowfullscreen></iframe>
             </div>
-            
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" allowfullscreen></iframe>
+
+            <div class="phone-mockup">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" title="Short Video 3" allowfullscreen></iframe>
             </div>
 
         </div>
 
-        <h2 class="section-heading">🚀 My Links</h2>
+        <h2 class="section-heading">Connect & Work</h2>
         <div class="links">
+
+            <a href="https://youtube.com/@iimikio" target="_blank" rel="noopener" class="link-card youtube">
+                <div class="link-icon"><i class="fab fa-youtube"></i></div>
+                <div class="link-content">
+                    <div class="link-title">YouTube</div>
+                    <div class="link-desc">Gaming, vlogs, and edited clips</div>
+                </div>
+            </a>
+
             <a href="https://miyomi.pages.dev/" target="_blank" rel="noopener" class="link-card">
                 <div class="link-icon"><i class="fas fa-globe"></i></div>
                 <div class="link-content">
                     <div class="link-title">Miyomi Hub</div>
-                    <div class="link-desc">Community platform for anime/manga resources – I help run this!</div>
+                    <div class="link-desc">Community platform for anime/manga resources</div>
                 </div>
             </a>
+
+            <a href="https://www.twitch.tv/iimikio" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon"><i class="fab fa-twitch"></i></div>
+                <div class="link-content">
+                    <div class="link-title">Twitch</div>
+                    <div class="link-desc">Live streams & chill community</div>
+                </div>
+            </a>
+
+            <a href="https://fb.com/iimikio" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon"><i class="fab fa-facebook"></i></div>
+                <div class="link-content">
+                    <div class="link-title">Facebook</div>
+                    <div class="link-desc">Community updates & stream info</div>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/iimikio/" target="_blank" rel="noopener" class="link-card">
+                <div class="link-icon"><i class="fab fa-instagram"></i></div>
+                <div class="link-content">
+                    <div class="link-title">Instagram</div>
+                    <div class="link-desc">Talk to me directly, see my personal life</div>
+                </div>
+            </a>
+
             <a href="https://github.com/mikkiio" target="_blank" rel="noopener" class="link-card">
                 <div class="link-icon"><i class="fab fa-github"></i></div>
                 <div class="link-content">
@@ -431,10 +435,11 @@
             <a href="https://youtube.com/@iimikio" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
             <a href="https://www.twitch.tv/iimikio" class="social-icon" target="_blank"><i class="fab fa-twitch"></i></a>
             <a href="https://www.instagram.com/iimikio/" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/mikkiio" class="social-icon" target="_blank"><i class="fab fa-github"></i></a>
         </div>
 
         <footer class="footer">
-            <p>© 2026 Mikio Shirato · <span class="mango-emoji">🥭</span> Keep creating <span class="mango-emoji">🥭</span></p>
+            <p>© 2026 Mikio Shirato · <span class="mango-emoji">🥭</span> No Purge, Just Mangoes <span class="mango-emoji">🥭</span></p>
         </footer>
     </div>
 
